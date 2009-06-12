@@ -6,7 +6,7 @@ class TestMarkupValidity < Test::Unit::TestCase
   include MarkupValidity::TestHelper
 
   class FakeUnit
-    include MarkupValidity
+    include MarkupValidity::Assertions
 
     attr_reader :assertions
 
