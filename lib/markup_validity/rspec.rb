@@ -13,6 +13,7 @@ module Spec
         end
       end
     end
+    alias :be_xhtml :be_xhtml_transitional
 
     def be_xhtml_strict
       Matcher.new :be_xhtml_strict do

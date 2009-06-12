@@ -10,6 +10,10 @@ module Spec
         Matchers.valid_document.should be_xhtml_transitional
       end
 
+      it "is xhtml" do
+        Matchers.valid_document.should be_xhtml
+      end
+
       it "is strict xhtml" do
         Matchers.valid_document.should be_xhtml_strict
       end

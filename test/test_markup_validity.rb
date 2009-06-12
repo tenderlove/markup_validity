@@ -23,8 +23,13 @@ class TestMarkupValidity < Test::Unit::TestCase
     @fu = FakeUnit.new
   end
 
-  def test_valid_xhtml
+  def test_valid_xhtml_transitional
     @fu.assert_xhtml_transitional valid_document
+    assert_equal [true, ''], @fu.assertions.first
+  end
+
+  def test_valid_xhtml
+    @fu.assert_xhtml valid_document
     assert_equal [true, ''], @fu.assertions.first
   end
 
