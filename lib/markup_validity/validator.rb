@@ -22,7 +22,7 @@ module MarkupValidity
       strings = []
       errors.each do |error|
 
-        start = error.line >= 2 ? error.line - 2 : error.line
+        start = error.line - [2, error.line].min
 
         error_line = error.line == 0 ? 1 : error.line
 
