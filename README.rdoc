@@ -4,29 +4,56 @@
 
 == DESCRIPTION:
 
-FIX (describe your package)
+MarkupValidity provides test/unit and rspec helpers for checking the validity
+of your documents.  Shortcuts for verifying xhtml-transitional and
+xhtml-strict documents are provided as well.  MarkupValidity will not only
+tell you when your document is invalid, but it will tell you what it *should*
+be.
 
 == FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
+* Make sure that markup_validity is required *after* test/unit, or mix
+  MarkupValidity::Assertions in to your test class yourself.
+* Currently AWESOME!
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
+  ###
+  # test/unit example
+  require 'test/unit'
+  require 'rubygems'
+  require 'markup_validity'
+
+  class ValidHTML < Test::Unit::TestCase
+    def test_i_can_has_valid_xhtml
+      assert_xhtml_transitional xhtml_document
+    end
+  end
+
+  ###
+  # rspec example
+  require 'rubygems'
+  require 'markup_validity'
+
+  describe "my XHTML document" do
+    it "can has transitional xhtml" do
+      xhtml_document.should be_xhtml_transitional
+    end
+  end
 
 == REQUIREMENTS:
 
-* FIX (list of requirements)
+* depends on nokogiri
 
 == INSTALL:
 
-* FIX (sudo gem install, anything else)
+* gem install markup_validity
 
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2009 FIX
+Copyright (c) 2009 Aaron Patterson
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
