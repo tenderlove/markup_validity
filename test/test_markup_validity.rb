@@ -26,6 +26,7 @@ class TestMarkupValidity < Test::Unit::TestCase
   def test_valid_xhtml_transitional
     @fu.assert_xhtml_transitional valid_document
     assert_equal [true, ''], @fu.assertions.first
+    assert_xhtml_transitional valid_document
   end
 
   def test_valid_xhtml
@@ -48,5 +49,21 @@ class TestMarkupValidity < Test::Unit::TestCase
     @fu.assert_xhtml_strict invalid_document
     assert_equal false, @fu.assertions.first.first
     assert_match('Missing child element', @fu.assertions.first.last)
+  end
+
+  def test_valid_schema
+    xsd = File.join(File.dirname(__FILE__), 'assets', 'shipment.xsd')
+    xml = File.join(File.dirname(__FILE__), 'assets', 'order.xml')
+    @fu.assert_schema File.read(xsd), File.read(xml)
+    assert_equal [true, ''], @fu.assertions.first
+  end
+
+  def test_invalid_schema
+    xsd = File.join(File.dirname(__FILE__), 'assets', 'shipment.xsd')
+    xml = File.read File.join(File.dirname(__FILE__), 'assets', 'order.xml')
+    xml.gsub!(/<name>[^<]*<\/name>/, '')
+    @fu.assert_schema File.read(xsd), xml
+    assert_equal false, @fu.assertions.first.first
+    assert_match('This element is not', @fu.assertions.first.last)
   end
 end
