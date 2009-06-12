@@ -1,5 +1,7 @@
 module Spec
   module Matchers
+    ###
+    # Assert that something is XHTML transitional
     def be_xhtml_transitional
       Matcher.new :be_xhtml_transitional do
         validator = nil
@@ -15,6 +17,8 @@ module Spec
     end
     alias :be_xhtml :be_xhtml_transitional
 
+    ###
+    # Assert that something is XHTML strict
     def be_xhtml_strict
       Matcher.new :be_xhtml_strict do
         validator = nil
@@ -32,6 +36,8 @@ module Spec
       end
     end
 
+    ###
+    # Assert that something validates given +schema+
     def be_valid_with_schema schema
       Matcher.new :be_xhtml_strict, schema do |_schema_|
         validator = nil

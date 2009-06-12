@@ -9,7 +9,10 @@ require 'markup_validity'
 
 Hoe.new('markup_validity', MarkupValidity::VERSION) do |p|
   p.developer('Aaron Patterson', 'aaronp@rubyforge.org')
-  p.extra_deps = [['nokogiri', '>= 1.3.1']]
+  p.readme_file       = 'README.rdoc'
+  p.history_file      = 'CHANGELOG.rdoc'
+  p.extra_rdoc_files  = FileList['*.rdoc']
+  p.extra_deps        = [['nokogiri', '>= 1.3.1']]
 end
 
 # vim: syntax=Ruby
