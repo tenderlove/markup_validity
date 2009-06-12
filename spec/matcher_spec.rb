@@ -25,6 +25,23 @@ module Spec
       it "is not strict xhtml" do
         Matchers.invalid_document.should_not be_xhtml_strict
       end
+
+      XSD = File.read(
+        File.expand_path(
+          File.join(File.dirname(__FILE__),'..','test','assets','shipment.xsd')
+        )
+      )
+      XML = File.read(
+        File.join(File.dirname(__FILE__), '..','test', 'assets', 'order.xml')
+      )
+
+      it "is valid given spec" do
+        XML.should be_valid_with_schema XSD
+      end
+
+      it "is not valid given spec" do
+        XML.gsub(/<name>[^<]*<\/name>/, '').should_not be_valid_with_schema XSD
+      end
     end
   end
 end

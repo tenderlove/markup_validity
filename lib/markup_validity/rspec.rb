@@ -31,5 +31,22 @@ module Spec
         end
       end
     end
+
+    def be_valid_with_schema schema
+      Matcher.new :be_xhtml_strict, schema do |_schema_|
+        validator = nil
+        match do |xhtml|
+          validator = MarkupValidity::Validator.new(
+            xhtml,
+            Nokogiri::XML::Schema(_schema_)
+          )
+          validator.valid?
+        end
+
+        failure_message_for_should do |actual|
+          validator.inspect
+        end
+      end
+    end
   end
 end
