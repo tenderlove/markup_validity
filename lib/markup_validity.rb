@@ -48,3 +48,7 @@ module MarkupValidity
     assert validator.valid?, validator.inspect
   end
 end
+
+if defined? Test::Unit::TestCase
+  class Test::Unit::TestCase; include MarkupValidity; end
+end
