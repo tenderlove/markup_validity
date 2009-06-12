@@ -13,6 +13,7 @@ Hoe.new('markup_validity', MarkupValidity::VERSION) do |p|
   p.history_file      = 'CHANGELOG.rdoc'
   p.extra_rdoc_files  = FileList['*.rdoc']
   p.extra_deps        = [['nokogiri', '>= 1.3.1']]
+  p.rubyforge_name    = 'seattlerb'
 end
 
 # vim: syntax=Ruby
