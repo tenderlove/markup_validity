@@ -41,6 +41,20 @@ be.
     end
   end
 
+  ###
+  # Here is an example error report
+
+  Error on line: 7:
+  Element 'p': This element is not expected. Expected is one of ( a, br, span, bdo, object, applet, img, map, iframe, tt ).
+  
+  6:     <p>
+  7:       <p>
+  8:         Yo dawg, I heard you like p-tags
+  9:       </p>
+  10:     </p>
+  .
+  <false> is not true.
+
 == REQUIREMENTS:
 
 * depends on nokogiri
