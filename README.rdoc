@@ -42,6 +42,18 @@ be.
   end
 
   ###
+  # Rails controller test example
+  require 'test_helper'
+  require 'markup_validity'
+  
+  class AwesomeControllerTest < ActionController::TestCase
+    test "valid markup" do
+      get :new
+      assert_xhtml_transitional @response.body
+    end
+  end
+
+  ###
   # Here is an example error report
 
   Error on line: 7:
