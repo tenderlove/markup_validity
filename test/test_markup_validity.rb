@@ -11,7 +11,7 @@ class TestMarkupValidity < Test::Unit::TestCase
       @assertions = []
     end
 
-    def assert_equal *args
+    def assert *args
       @assertions << args
     end
   end
@@ -28,7 +28,7 @@ class TestMarkupValidity < Test::Unit::TestCase
 </html>
     eoxhtml
 
-    assert_equal [0, 0, ''], fu.assertions.first
+    assert_equal [true, ''], fu.assertions.first
   end
 
   def test_invalid_xhtml
@@ -42,7 +42,7 @@ class TestMarkupValidity < Test::Unit::TestCase
 </html>
     eoxhtml
 
-    assert_equal [0, 1], fu.assertions.first[0..1]
+    assert_equal false, fu.assertions.first.first
     assert_match('Missing child element', fu.assertions.first.last)
   end
 end
