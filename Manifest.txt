@@ -1,0 +1,9 @@
+.autotest
+History.txt
+Manifest.txt
+README.txt
+Rakefile
+lib/markup_validity.rb
+lib/xhtml1-transitional.xsd
+lib/xml.xsd
+test/test_markup_validity.rb
