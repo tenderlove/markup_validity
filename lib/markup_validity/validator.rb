@@ -21,10 +21,15 @@ module MarkupValidity
       lines = @xml.split("\n")
       strings = []
       errors.each do |error|
-        strings << "Error on line: #{error.line - 1}:"
+
+        start = error.line >= 2 ? error.line - 2 : error.line
+
+        error_line = error.line == 0 ? 1 : error.line
+
+        strings << "Error on line: #{error_line}:"
         strings << error.message.gsub(/\{[^\}]*\}/, '')
-        Range.new(error.line - 2, error.line + 2).each { |number|
-          strings << "#{number}: #{lines[number]}"
+        Range.new(start, error.line + 2).each { |number|
+          strings << "#{number + 1}: #{lines[number]}"
         }
         strings << ""
       end

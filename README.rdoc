@@ -1,6 +1,6 @@
 = markup_validity
 
-* FIX (url)
+* http://github.com/tenderlove/markup_validity
 
 == DESCRIPTION:
 

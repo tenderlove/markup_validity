@@ -23,6 +23,18 @@ class TestMarkupValidity < Test::Unit::TestCase
     @fu = FakeUnit.new
   end
 
+  def test_line_numbers_do_not_roll_over
+    validator = MarkupValidity::Validator.new('foo')
+    assert !validator.valid?
+    assert_no_match(/-1/, validator.inspect)
+  end
+
+  def test_line_numbers_do_not_roll_over_line_1
+    validator = MarkupValidity::Validator.new("\nfoo")
+    assert !validator.valid?
+    assert_no_match(/-1/, validator.inspect)
+  end
+
   def test_valid_xhtml_transitional
     @fu.assert_xhtml_transitional valid_document
     assert_equal [true, ''], @fu.assertions.first
