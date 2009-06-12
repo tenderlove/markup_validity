@@ -13,5 +13,22 @@ module Spec
         end
       end
     end
+
+    def be_xhtml_strict
+      Matcher.new :be_xhtml_strict do
+        validator = nil
+        match do |xhtml|
+          validator = MarkupValidity::Validator.new(
+            xhtml,
+            MarkupValidity::Validator::XHTML1_STRICT
+          )
+          validator.valid?
+        end
+
+        failure_message_for_should do |actual|
+          validator.inspect
+        end
+      end
+    end
   end
 end

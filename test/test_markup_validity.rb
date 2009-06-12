@@ -1,7 +1,10 @@
 require "test/unit"
+require 'helper'
 require "markup_validity"
 
 class TestMarkupValidity < Test::Unit::TestCase
+  include MarkupValidity::TestHelper
+
   class FakeUnit
     include MarkupValidity
 
@@ -16,33 +19,29 @@ class TestMarkupValidity < Test::Unit::TestCase
     end
   end
 
-  def test_valid_xhtml
-    fu = FakeUnit.new
-    fu.assert_xhtml_transitional <<-eoxhtml
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <title>hello world</title>
-  </head>
-  <body>
-  </body>
-</html>
-    eoxhtml
+  def setup
+    @fu = FakeUnit.new
+  end
 
-    assert_equal [true, ''], fu.assertions.first
+  def test_valid_xhtml
+    @fu.assert_xhtml_transitional valid_document
+    assert_equal [true, ''], @fu.assertions.first
+  end
+
+  def test_valid_xhtml_strict
+    @fu.assert_xhtml_strict valid_document
+    assert_equal [true, ''], @fu.assertions.first
   end
 
   def test_invalid_xhtml
-    fu = FakeUnit.new
-    fu.assert_xhtml_transitional <<-eoxhtml
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-  </head>
-  <body>
-  </body>
-</html>
-    eoxhtml
+    @fu.assert_xhtml_transitional invalid_document
+    assert_equal false, @fu.assertions.first.first
+    assert_match('Missing child element', @fu.assertions.first.last)
+  end
 
-    assert_equal false, fu.assertions.first.first
-    assert_match('Missing child element', fu.assertions.first.last)
+  def test_invalid_xhtml_strict
+    @fu.assert_xhtml_strict invalid_document
+    assert_equal false, @fu.assertions.first.first
+    assert_match('Missing child element', @fu.assertions.first.last)
   end
 end

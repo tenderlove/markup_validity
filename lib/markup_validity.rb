@@ -9,6 +9,7 @@ module MarkupValidity
       XHTML1_TRANSITIONAL = Nokogiri::XML::Schema(
         File.read('xhtml1-transitional.xsd')
       )
+      XHTML1_STRICT = Nokogiri::XML::Schema(File.read('xhtml1-strict.xsd'))
     end
 
     attr_reader :errors
@@ -37,6 +38,12 @@ module MarkupValidity
   end
 
   def assert_xhtml_transitional xhtml
+    validator = Validator.new xhtml
+    assert validator.valid?, validator.inspect
+  end
+  alias :assert_xhtml :assert_xhtml_transitional
+
+  def assert_xhtml_strict xhtml
     validator = Validator.new xhtml
     assert validator.valid?, validator.inspect
   end
