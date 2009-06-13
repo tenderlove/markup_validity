@@ -39,7 +39,7 @@ module Spec
     ###
     # Assert that something validates given +schema+
     def be_valid_with_schema schema
-      Matcher.new :be_xhtml_strict, schema do |_schema_|
+      Matcher.new :be_valid_with_schema, schema do |_schema_|
         validator = nil
         match do |xhtml|
           validator = MarkupValidity::Validator.new(
