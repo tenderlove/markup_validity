@@ -7,9 +7,30 @@ module MarkupValidity
       XHTML1_STRICT = Nokogiri::XML::Schema(File.read('xhtml1-strict.xsd'))
     end
 
+    DTD_REFS = {
+      XHTML1_STRICT => [
+        'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd',
+        'xhtml1-strict.dtd'
+      ],
+      XHTML1_TRANSITIONAL => [
+        'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd',
+        'xhtml1-transitional.dtd'
+      ],
+    }
+
     attr_reader :errors
     def initialize xml, reference = XHTML1_TRANSITIONAL
-      doc         = Nokogiri::XML xml
+      if DTD_REFS[reference]
+        fixed_dtd = xml.sub(DTD_REFS[reference].first, DTD_REFS[reference][1])
+      else
+        fixed_dtd = xml
+      end
+
+      doc = Dir.chdir(File.dirname(__FILE__)) do
+        Nokogiri::XML(fixed_dtd) { |cfg|
+          cfg.noent.dtdload.dtdvalid
+        }
+      end
       @reference  = reference
       @xml        = xml
       @errors     = reference.validate(doc)

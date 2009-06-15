@@ -11,7 +11,7 @@ module MarkupValidity
     ###
     # Assert that +xhtml+ is valid XHTML Strict
     def assert_xhtml_strict xhtml
-      validator = Validator.new xhtml
+      validator = Validator.new xhtml, Validator::XHTML1_STRICT
       assert validator.valid?, validator.inspect
     end
 

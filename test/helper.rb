@@ -27,5 +27,13 @@ module MarkupValidity
 </html>
       eoxhtml
     end
+
+    def invalid_entity_document
+      File.read(File.join(File.dirname(__FILE__), 'assets', 'invalid_entity.xhtml'))
+    end
+
+    def invalid_entity_document_transitional
+      File.read(File.join(File.dirname(__FILE__), 'assets', 'invalid_entity_transitional.xhtml'))
+    end
   end
 end

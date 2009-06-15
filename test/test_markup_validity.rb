@@ -23,6 +23,14 @@ class TestMarkupValidity < Test::Unit::TestCase
     @fu = FakeUnit.new
   end
 
+  def test_strict_invalid_entity_error
+    assert_xhtml_strict invalid_entity_document
+  end
+
+  def test_transitional_invalid_entity_error
+    assert_xhtml_transitional invalid_entity_document_transitional
+  end
+
   def test_line_numbers_do_not_roll_over
     validator = MarkupValidity::Validator.new('foo')
     assert !validator.valid?
