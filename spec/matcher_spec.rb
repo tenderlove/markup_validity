@@ -26,6 +26,14 @@ module Spec
         Matchers.invalid_document.should_not be_xhtml_strict
       end
 
+      it "is xhtml+rdfa" do
+        Matchers.valid_document.should be_xhtml_rdfa
+      end
+
+      it "is no xhtml+rdfa" do
+        Matchers.invalid_document.should_not be_xhtml_rdfa
+      end
+
       XSD = File.read(
         File.expand_path(
           File.join(File.dirname(__FILE__),'..','test','assets','shipment.xsd')

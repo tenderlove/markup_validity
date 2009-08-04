@@ -5,6 +5,7 @@ module MarkupValidity
         File.read('xhtml1-transitional.xsd')
       )
       XHTML1_STRICT = Nokogiri::XML::Schema(File.read('xhtml1-strict.xsd'))
+      XHTML1_RDFA = Nokogiri::XML::Schema(File.read('xhtml-rdfa-1.xsd'))
     end
 
     DTD_REFS = {
@@ -16,6 +17,10 @@ module MarkupValidity
         'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd',
         'xhtml1-transitional.dtd'
       ],
+      XHTML1_RDFA => [
+        'http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd',
+        'xhtml-rdfa-1.dtd'
+      ]
     }
 
     attr_reader :errors

@@ -4,7 +4,7 @@ require 'markup_validity/assertions'
 require 'markup_validity/rspec'
 
 module MarkupValidity
-  VERSION = '1.0.0'
+  VERSION = '1.0.1'
 end
 
 if defined? Test::Unit::TestCase
