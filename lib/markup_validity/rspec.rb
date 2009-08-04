@@ -39,7 +39,7 @@ module Spec
     ###
     # Assert that something is XHTML+RDFa
     def be_xhtml_rdfa
-      Matcher.new :be_xhtml_strict do
+      Matcher.new :be_xhtml_rdfa do
         validator = nil
         match do |xhtml|
           validator = MarkupValidity::Validator.new(

@@ -59,6 +59,11 @@ class TestMarkupValidity < Test::Unit::TestCase
     assert_equal [true, ''], @fu.assertions.first
   end
 
+  def test_valid_xhtml_rdfa
+    @fu.assert_xhtml_rdfa valid_document_xhtml_rdfa
+    assert_equal [true, ''], @fu.assertions.first
+  end
+
   def test_invalid_xhtml
     @fu.assert_xhtml_transitional invalid_document
     assert_equal false, @fu.assertions.first.first
@@ -67,6 +72,12 @@ class TestMarkupValidity < Test::Unit::TestCase
 
   def test_invalid_xhtml_strict
     @fu.assert_xhtml_strict invalid_document
+    assert_equal false, @fu.assertions.first.first
+    assert_match('Missing child element', @fu.assertions.first.last)
+  end
+
+  def test_invalid_xhtml_rdfa
+    @fu.assert_xhtml_rdfa invalid_document
     assert_equal false, @fu.assertions.first.first
     assert_match('Missing child element', @fu.assertions.first.last)
   end

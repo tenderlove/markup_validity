@@ -17,7 +17,7 @@ module MarkupValidity
 
     ###
     # Assert that +xhtml+ is valid XHTML+RDFa
-    def asser_xhtml_rdfa xhtml
+    def assert_xhtml_rdfa xhtml
       validator = Validator.new xhtml, Validator::XHTML1_RDFA
       assert validator.valid?, validator.inspect
     end
